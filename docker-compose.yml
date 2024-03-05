@@ -5,12 +5,13 @@ services:
   frontend:
       container_name: ${PROJECT_NAME}_frontend
       build:
-        context: ${BASE_DIR}/frontend
-        dockerfile: .DockerfileFrontend
+        context: ./main
+        dockerfile: DockerfileFrontend
       expose:
         - ${FRONTEND_PORT}
       volumes:
-        - ${BASE_DIR}/frontend:/frontend
+        - ${BASE_DIR}/frontend:/usr/src/app
+        - /usr/src/app/node_modules
       depends_on:
         - backend
       networks:
@@ -20,8 +21,8 @@ services:
   backend:
       container_name: ${PROJECT_NAME}_backend
       build:
-        context: ${BASE_DIR}/backend
-        dockerfile: .DockerfileBackend
+        context: ./main
+        dockerfile: DockerfileBackend
       volumes:
         - ${BASE_DIR}/backend:/backend
       ports:

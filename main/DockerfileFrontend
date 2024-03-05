@@ -1,0 +1,14 @@
+FROM node:16
+
+RUN mkdir -p /usr/src/app
+RUN chmod -R 777 /usr/src/app
+
+WORKDIR /usr/src/app
+
+COPY /home/frontend/package.json ./
+
+RUN npm install
+
+COPY /home/frontend/ ./
+
+CMD ["npm","run","start"]
